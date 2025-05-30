@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task List</title>
+</head>
+<body>
+  <h1>Create New Task</h1>
+  <form th:action="@{/task/create}" th:object="${task}" method="post">
+    <div style="display: flex; flex-direction: column; width: 500px; margin-bottom: 20px;">
+      <label>Title</label>
+      <input type="text" th:field="*{title}"/>
+    </div>
+    <div style="display: flex; flex-direction: column; width: 500px; margin-bottom: 20px;">
+      <label>Description</label>
+      <textarea type="text" th:field="*{description}"></textarea>
+    </div>
+    <div style="display: flex; flex-direction: column; width: 500px; margin-bottom: 20px;">
+      <label>Owner</label>
+      <select>
+        <option>Ford</option>
+        <option>Jett</option>
+      </select>
+    </div>
+    <div style="display: flex; flex-direction: column; width: 500px; margin-bottom: 20px;">
+      <label>Due Date</label>
+      <input type="date" th:field="*{dueDate}"/>
+    </div>
+    <input type="submit" value="Submit" class=""/>
+  </form>
+</body>
+</html>

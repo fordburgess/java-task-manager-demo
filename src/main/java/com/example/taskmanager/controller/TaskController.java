@@ -1,18 +1,11 @@
 package com.example.taskmanager.controller;
 
-import java.security.Principal;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
-import com.example.taskmanager.repository.TaskRepository;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.example.taskmanager.service.*;
 import com.example.taskmanager.model.Task;
 
@@ -22,9 +15,8 @@ import com.example.taskmanager.model.Task;
 public class TaskController {
   private final TaskService taskService;
 
-  @Autowired
   TaskController(TaskService taskService) {
-      this.taskService = taskService;
+    this.taskService = taskService;
   }
 
   @GetMapping("/tasks")
@@ -33,9 +25,17 @@ public class TaskController {
     return "tasks";
   }
 
-  @PostMapping("/tasks/create")
+  @GetMapping("/task/create") // must have get request to show template
+  public String showTaskCreateTemplate(Model model) {
+    model.addAttribute("task", new Task());
+    // model.addAttribute("users", userService.findAll())
+    return "task-new";
+  }
+
+
+  @PostMapping("/task/create")
   public String createTask(@ModelAttribute Task task) {
     taskService.createTask(task);
-    return "test";
+    return "redirect:/tasks";
   }
 }

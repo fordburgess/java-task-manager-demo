@@ -1,6 +1,6 @@
 package com.example.taskmanager.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,9 +16,9 @@ public class Task {
 
   private String title;
   private String description;
-  private LocalDateTime dateCreated;
-  private LocalDateTime dueDate;
-  private LocalDateTime dateCompleted;
+  private LocalDate dateCreated;
+  private LocalDate dueDate;
+  private LocalDate dateCompleted;
   private Boolean isCompleted = false;
 
   @ManyToOne
@@ -38,15 +38,15 @@ public class Task {
     return description;
   }
 
-  public LocalDateTime getDateCreated() {
+  public LocalDate getDateCreated() {
     return dateCreated;
   }
 
-  public LocalDateTime getDueDate() {
+  public LocalDate getDueDate() {
     return dueDate;
   }
 
-  public LocalDateTime getDateCompleted() {
+  public LocalDate getDateCompleted() {
     return dateCompleted;
   }
 
@@ -66,11 +66,11 @@ public class Task {
     this.description = description;
   }
 
-  public void setDueDate(LocalDateTime dueDate) {
+  public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
 
-  public void setDateCompleted(LocalDateTime dateCompleted) {
+  public void setDateCompleted(LocalDate dateCompleted) {
     this.dateCompleted = dateCompleted;
   }
 
@@ -87,11 +87,11 @@ public class Task {
   public Task(
     String title,
     String description,
-    LocalDateTime dueDate
+    LocalDate dueDate
   ) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
-    this.dateCreated = LocalDateTime.now();
+    this.dateCreated = LocalDate.now();
   }
 }
