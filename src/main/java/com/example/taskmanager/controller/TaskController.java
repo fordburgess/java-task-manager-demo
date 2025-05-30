@@ -11,6 +11,7 @@ import com.example.taskmanager.repository.TaskRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.taskmanager.service.*;
 import com.example.taskmanager.model.Task;
@@ -20,23 +21,22 @@ import com.example.taskmanager.model.Task;
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
-  @Autowired
-  private TaskRepository taskRepository;
+  private final TaskService taskService;
 
-  @GetMapping("/tasks")
+  @Autowired
+  TaskController(TaskService taskService) {
+      this.taskService = taskService;
+  }
+
+  @GetMapping("tasks")
   public String listTasks(Model model) {
-      model.addAttribute("tasks", taskRepository.findAll());
+      model.addAttribute("tasks", taskService.findAll());
       return "tasks";
   }
 
-  private void prepareTasksListModel(Model model, Principal principal) {
-
-  }
-
   @PostMapping("/tasks/create")
-  public String createTask(Task task) {
-    taskService.create(task);
+  public String createTask(@ModelAttribute Task task) {
+    taskService.createTask(task);
     return "test";
   }
-
 }
