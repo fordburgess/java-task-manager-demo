@@ -19,7 +19,6 @@ import com.example.taskmanager.model.Task;
 
 
 @Controller
-@RequestMapping("/tasks")
 public class TaskController {
   private final TaskService taskService;
 
@@ -28,10 +27,10 @@ public class TaskController {
       this.taskService = taskService;
   }
 
-  @GetMapping("tasks")
+  @GetMapping("/tasks")
   public String listTasks(Model model) {
-      model.addAttribute("tasks", taskService.findAll());
-      return "tasks";
+    model.addAttribute("tasks", taskService.findAll());
+    return "tasks";
   }
 
   @PostMapping("/tasks/create")
