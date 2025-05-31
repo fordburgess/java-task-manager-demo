@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import com.example.taskmanager.service.*;
 import com.example.taskmanager.model.Task;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -17,6 +19,11 @@ public class TaskController {
 
   TaskController(TaskService taskService) {
     this.taskService = taskService;
+  }
+
+  @GetMapping("/")
+  public String redirectToTasks() {
+    return "redirect:/tasks";
   }
 
   @GetMapping("/tasks")
