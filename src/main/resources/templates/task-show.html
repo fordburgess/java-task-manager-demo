@@ -17,6 +17,10 @@
   </div>
   <div class="w-1/3 mx-auto flex justify-between">
     <a href="/tasks" class="text-blue-400">Back</a>
+    <form th:action="@{/delete-task/{id}(id=${task.id})}" method="post">
+      <input type="hidden" name="" th:value="${task.id}" />
+      <input type="submit" value="Delete This Task" class="text-red-500" />
+    </form>
   </div>
 </body>
 </html>

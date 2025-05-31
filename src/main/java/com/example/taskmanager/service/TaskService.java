@@ -10,4 +10,6 @@ public interface TaskService {
   List<Task> findAll();
 
   Task findById(Long id);
+
+  void deleteById(Long id);
 }
