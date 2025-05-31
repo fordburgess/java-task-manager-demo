@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class TaskController {
   private final TaskService taskService;
+  private final UserService userService;
 
-  TaskController(TaskService taskService) {
+  TaskController(TaskService taskService, UserService userService) {
     this.taskService = taskService;
+    this.userService = userService;
   }
 
   @GetMapping("/")
@@ -35,7 +37,7 @@ public class TaskController {
   @GetMapping("/task/create") // must have get request to show template
   public String showTaskCreateTemplate(Model model) {
     model.addAttribute("task", new Task());
-    // model.addAttribute("users", userService.findAll())
+    model.addAttribute("users", userService.findAll());
     return "task-new";
   }
 
