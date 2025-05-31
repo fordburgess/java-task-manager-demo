@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.example.taskmanager.service.*;
 import com.example.taskmanager.model.Task;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,10 +43,17 @@ public class TaskController {
     return "task-new";
   }
 
-
   @PostMapping("/task/create")
   public String createTask(@ModelAttribute Task task) {
     taskService.createTask(task);
     return "redirect:/tasks";
   }
+
+  @GetMapping("/task/:id")
+  public String showSpecificTask(@PathVariable Long id, Model model) {
+    Task task = taskService.findById(id);
+    model.addAttribute("task", task);
+    return "task-show";
+  }
+
 }

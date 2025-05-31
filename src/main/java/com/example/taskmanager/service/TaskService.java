@@ -8,4 +8,6 @@ public interface TaskService {
   void createTask(Task task);
 
   List<Task> findAll();
+
+  Task findById(Long id);
 }
