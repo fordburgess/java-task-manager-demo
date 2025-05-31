@@ -66,6 +66,10 @@ public class Task {
     this.description = description;
   }
 
+  public void setDateCreated(LocalDate dateCreated) {
+    this.dateCreated = dateCreated;
+  }
+
   public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
@@ -83,15 +87,4 @@ public class Task {
   }
 
   public Task() {}
-
-  public Task(
-    String title,
-    String description,
-    LocalDate dueDate
-  ) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.dateCreated = LocalDate.now();
-  }
 }

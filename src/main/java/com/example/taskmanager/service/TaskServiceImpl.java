@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,6 +18,9 @@ public class TaskServiceImpl implements TaskService {
 
   @Override
   public void createTask(Task task) {
+    task.setDateCreated(LocalDate.now());
+    System.out.println("NEW TASK:");
+    System.out.println(task.getDateCreated());
     taskRepository.save(task);
   }
 
