@@ -15,6 +15,8 @@ import com.example.taskmanager.service.*;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.User;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -61,12 +63,20 @@ public class TaskController {
     User owner = task.getOwner();
     model.addAttribute("owner", owner);
 
+    model.addAttribute("users", userService.findAll());
+
     return "task-show";
   }
 
   @PostMapping("/delete-task/{id}")
   public String deleteById(@PathVariable Long id, Model model) {
     taskService.deleteById(id);
+    return "redirect:/tasks";
+  }
+
+  @PostMapping("/task/edit/{id}")
+  public String editTask(@ModelAttribute Task task) {
+    taskService.updateTask(task);
     return "redirect:/tasks";
   }
 }
