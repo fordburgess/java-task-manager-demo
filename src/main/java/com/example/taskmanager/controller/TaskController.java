@@ -1,5 +1,8 @@
 package com.example.taskmanager.controller;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +14,6 @@ import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.User;
 import com.example.taskmanager.service.TaskService;
 import com.example.taskmanager.service.UserService;
-
-
-
-
 
 @Controller
 public class TaskController {
@@ -33,7 +32,9 @@ public class TaskController {
 
   @GetMapping("/tasks")
   public String listTasks(Model model) {
-    model.addAttribute("tasks", taskService.findAll());
+    List<Task> tasks = taskService.findAll();
+    Collections.sort(tasks);
+    model.addAttribute("tasks", tasks);
     return "tasks";
   }
 
@@ -57,7 +58,6 @@ public class TaskController {
 
     User owner = task.getOwner();
     model.addAttribute("owner", owner);
-
     model.addAttribute("users", userService.findAll());
 
     return "task-show";

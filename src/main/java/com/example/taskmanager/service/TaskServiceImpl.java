@@ -1,6 +1,6 @@
 package com.example.taskmanager.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
 
   @Override
   public void createTask(Task task) {
-    task.setDateCreated(LocalDate.now());
+    task.setDateCreated(LocalDateTime.now());
     taskRepository.save(task);
   }
 

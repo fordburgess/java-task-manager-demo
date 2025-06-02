@@ -1,6 +1,8 @@
 package com.example.taskmanager.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,14 +11,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Task {
+public class Task implements Comparable<Task> {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   private String title;
   private String description;
-  private LocalDate dateCreated;
+  private LocalDateTime dateCreated;
   private LocalDate dueDate;
   private LocalDate dateCompleted;
   private Boolean isCompleted = false;
@@ -38,7 +40,7 @@ public class Task {
     return description;
   }
 
-  public LocalDate getDateCreated() {
+  public LocalDateTime getDateCreated() {
     return dateCreated;
   }
 
@@ -66,7 +68,7 @@ public class Task {
     this.description = description;
   }
 
-  public void setDateCreated(LocalDate dateCreated) {
+  public void setDateCreated(LocalDateTime dateCreated) {
     this.dateCreated = dateCreated;
   }
 
@@ -87,4 +89,10 @@ public class Task {
   }
 
   public Task() {}
+
+  // to sort by date
+  @Override
+  public int compareTo(Task task) {
+    return getDateCreated().compareTo(task.getDateCreated());
+  }
 }
