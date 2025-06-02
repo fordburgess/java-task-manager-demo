@@ -1,21 +1,16 @@
 package com.example.taskmanager.controller;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.taskmanager.service.*;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.User;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.taskmanager.service.TaskService;
+import com.example.taskmanager.service.UserService;
 
 
 
@@ -75,8 +70,8 @@ public class TaskController {
   }
 
   @PostMapping("/task/edit/{id}")
-  public String editTask(@ModelAttribute Task task) {
-    taskService.updateTask(task);
+  public String editTask(@ModelAttribute Task task, @PathVariable("id") Long id) {
+    taskService.updateTask(task, id);
     return "redirect:/tasks";
   }
 }

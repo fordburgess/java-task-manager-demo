@@ -1,12 +1,13 @@
 package com.example.taskmanager.service;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+
 import org.springframework.stereotype.Service;
 
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repository.TaskRepository;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -19,8 +20,6 @@ public class TaskServiceImpl implements TaskService {
   @Override
   public void createTask(Task task) {
     task.setDateCreated(LocalDate.now());
-    System.out.println("NEW TASK:");
-    System.out.println(task.getDateCreated());
     taskRepository.save(task);
   }
 
@@ -40,7 +39,17 @@ public class TaskServiceImpl implements TaskService {
   }
 
   @Override
-  public void updateTask(Task task) {
-    taskRepository.save(task);
+  public Task updateTask(Task task, Long id) {
+    Task taskDB = taskRepository.findById(id).get();
+
+    if (Objects.nonNull(taskDB)) {
+      taskDB.setTitle(task.getTitle());
+      taskDB.setDescription(task.getDescription());
+      taskDB.setOwner(task.getOwner());
+      taskDB.setDueDate(task.getDueDate());
+      taskDB.setIsCompleted(task.getIsCompleted());
+    }
+
+    return taskRepository.save(taskDB);
   }
 }

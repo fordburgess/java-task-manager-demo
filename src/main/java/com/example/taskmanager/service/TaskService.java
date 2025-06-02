@@ -1,7 +1,8 @@
 package com.example.taskmanager.service;
 
-import com.example.taskmanager.model.Task;
 import java.util.List;
+
+import com.example.taskmanager.model.Task;
 
 
 public interface TaskService {
@@ -13,5 +14,5 @@ public interface TaskService {
 
   void deleteById(Long id);
 
-  void updateTask(Task task);
+  Task updateTask(Task task, Long id);
 }
